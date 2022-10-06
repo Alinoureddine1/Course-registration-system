@@ -8,7 +8,7 @@ Course::Course() {
 	this->courseName = "";
 	this->courseNumber = "";
 	this->numbcredits = 0;
-	
+
 }
 Course::Course(std::string cname, std::string cnumb, const LectureTime& that, int credits) {
 	this->courseName = cname;
