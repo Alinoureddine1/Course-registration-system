@@ -13,6 +13,7 @@ public:
 	std::string getfday();
 	std::string getsday();
 	int gettime();
+	void printlecttime();
 	void operator= (const LectureTime & temp);
 	~LectureTime();
 private:
