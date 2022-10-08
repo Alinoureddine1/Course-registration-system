@@ -8,7 +8,7 @@ Course::Course() {
 	this->courseName = "";
 	this->courseNumber = "";
 	this->numbcredits = 0;
-
+	
 }
 Course::Course(std::string cname, std::string cnumb, const LectureTime& that, int credits) {
 	this->courseName = cname;
@@ -59,6 +59,24 @@ LectureTime Course::getlectime() {
 }
 int Course::getcedits() {
 	return this->numbcredits;
+}
+void Course::operator= (const Course& that) {
+	if (this != &that) {
+		this->courseName = that.courseName;
+		this->courseNumber = that.courseNumber;
+		this->numbcredits = that.numbcredits;
+		this->lecturetime = that.lecturetime;
+	}
+}
+void Course::printcourse() {
+	cout << this->courseNumber << "  " << this->courseName << "  credits: " << this->numbcredits << endl;
+	this->lecturetime.printlecttime();
+}
+bool Course::samecourse(Course& that) {
+	if(this->getcourseName() != that.getcourseName() || this->getcourseNumber() != that.getcourseNumber() || this->getcedits() != that.getcedits() ){
+		return false;
+	}
+	return true;
 }
 Course::~Course() {
 	std::cout << "Object of type Course was deleted \n" << std::endl;
