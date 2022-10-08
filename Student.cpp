@@ -56,32 +56,49 @@ void Student::setcredits(int credits) {
 	}
 	this->numbcredits = credits;
 }
-void Student::addcourse( Course& that) {
+bool Student::addcourse( Course& that) {
 
 	if (this->counter < 6) {
 
 		for (int i = 0; i < counter; i++) {
 			if (this->courses[i]->overlap(that) ) {
 				std::cerr << "Error! This course overlaps with another course\n";
-				return;
+				return false;
 			}
 		}
 		courses[counter] =  new Course(that);
 		counter++;
+		numbcredits += that.getcedits();
+		return true;
 
 	}
 	else {
 		std::cerr << "Error! You are not allowed to exceed 6 courses\n";
-		return;
+		return false;
 	}
 
+}
+
+bool Student::removecourse(Course& that) {
+	for (int i = 0; i < 6; i++) {
+		if (this->courses[i]->samecourse((that))) {
+			delete this->courses[i];
+			this->courses[i] = nullptr;
+			return true;
+		
+		}
+
+	}
+	return false;
 }
 
 void Student::displaycourses() {
 	std::cout << "Student "<<this->getid()<<" is enrolled to the following courses:\n";
 	for (int i = 0; i < this->counter; i++) {
-		std::cout << this->courses[i]->getcourseNumber() << " \"" << this->courses[i]->getcourseName() << "\" " << "\tLecture starts:" << this->courses[i]->gettime() <<"\tCredits: " << this->courses[i]->getcedits()<< "\n" << endl;
+		
+		this->courses[i]->printcourse();
 	}
+	cout << "Total number of credits: " << this->getcredits() << endl;
 
 }
 int Student::getid() {
@@ -89,6 +106,22 @@ int Student::getid() {
 }
 int Student::getcredits() {
 	return this->numbcredits;
+}
+
+bool Student::isregistered(Course &that) {
+	for (int i = 0; i < 6; i++) {
+		if (this->courses[i]->samecourse((that))) {
+			return true;
+		}
+
+	}
+	return false;
+}
+bool Student::samestudent(Student* that) {
+	if (this->getname() != that->getname() || this->getid() != that->getid()) {
+		return false;
+	}
+	return true;
 }
 Course Student::returncourse(int x) {
 	return *(this->courses[x - 1]);
