@@ -24,8 +24,8 @@ int main()
     s.addcourse(lec);
     s.addcourse(lec2);
     s.displaycourses();
-    CourseRegistration r(15,5);
-   ;
+   
+   
    
     return 0;
 }
