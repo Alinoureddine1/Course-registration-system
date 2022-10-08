@@ -16,14 +16,17 @@ private:
 
 public:
 	Student();
-	Student(std::string,int,int,int,const Course *that[6]);
+	Student(std::string,int,int,int, Course *that[6]);
 	void setname(std::string);
 	void setid(int);
 	void setcredits(int);
 	void setcounter(int);
-	void addcourse( Course&);
+	bool addcourse( Course&);
+	bool isregistered(Course &);
+	bool removecourse(Course&);
 	void displaycourses();
 	std::string getname();
+	bool samestudent(Student*);
 	int getid();
 	int getcredits();
 	Course returncourse(int); //choose which course to be returned (1 to 6)
