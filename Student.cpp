@@ -80,7 +80,7 @@ void Student::addcourse( Course& that) {
 void Student::displaycourses() {
 	std::cout << "Student "<<this->getid()<<" is enrolled to the following courses:\n";
 	for (int i = 0; i < this->counter; i++) {
-		std::cout << this->courses[i]->getcourseNumber() << " \"" << this->courses[i]->getcourseName() << "\" " << "\tLecture starts:" << this->courses[i]->gettime() <<"\tCredits: " << this->courses[i]->getcedits()<< endl;
+		std::cout << this->courses[i]->getcourseNumber() << " \"" << this->courses[i]->getcourseName() << "\" " << "\tLecture starts:" << this->courses[i]->gettime() <<"\tCredits: " << this->courses[i]->getcedits()<< "\n" << endl;
 	}
 
 }
