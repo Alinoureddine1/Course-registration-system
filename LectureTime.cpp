@@ -27,6 +27,9 @@ void LectureTime::setsday(std::string sday) {
 void LectureTime::settime(int t) {
 	time = t;
 }
+void LectureTime::printlecttime() {
+	cout << "First day: " << this->getfday() << " Second day: " << this->getsday() << " Time: " << this->gettime() << endl;
+}
 std::string LectureTime::getfday() {
 	return firstday;
 }
