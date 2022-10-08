@@ -20,6 +20,9 @@ public:
 	int gettime();
 	bool overlap( Course&); //testing if it overlaps
 	int getcedits();
+	bool samecourse(Course&);
+	void printcourse();
+	void operator= (const Course& temp);
 	~Course();
 
 
