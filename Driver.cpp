@@ -1,19 +1,28 @@
 
+#include "Student.h"
 #include <iostream>
 #include "Course.h"
 #include "LectureTime.h"
-#include "Student.h"
+#include <string>
 using namespace std;
 
 int main()
 {
-    LectureTime lect("M","T",12);
-
-    Course lec("coen","21",lect,19);
+   LectureTime lect("M","T",950);
+   LectureTime lect1("W", "T", 1000);
+   
+    Course lec("coen","21",lect,3);
+    Course lec2("math", "212", lect1, 3);
     LectureTime l(lec.getlectime());
     cout << l.getfday() << endl;
-    // Student s;
-    // s.setname("Ali");
 
+    Student s;
+    string name = "name";
+    
+    s.setname(name);
+    s.addcourse(lec);
+    s.addcourse(lec2);
+    s.displaycourses();
+   
     return 0;
 }
