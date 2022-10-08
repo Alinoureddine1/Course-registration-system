@@ -20,11 +20,16 @@ private:
 public:
     CourseRegistration();
     CourseRegistration(int, int);
+    Course& getcourse();
     int getMaxS();
     int getNumofS();
     void setMaxS(int);
     void setNumofS(int);
-
+    void displaycourse();
+    bool lookforstudent(Student*);
+    void removestudent(Student*);
+    void addStudent(Student*);
+    ~CourseRegistration();
 
 
 };
