@@ -16,7 +16,8 @@ private:
 
 public:
 	Student();
-	Student(std::string,int,int,int, Course *that[6]);
+	Student(std::string,int,int, Course *that[6]);
+	Student(std::string, int);
 	void setname(std::string);
 	void setid(int);
 	void setcredits(int);
