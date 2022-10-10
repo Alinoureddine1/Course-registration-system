@@ -18,10 +18,11 @@ private:
     
 
 public:
-    CourseRegistration();
+    
     CourseRegistration(int, int);
     Course& getcourse();
     int getMaxS();
+    void setcourse(Course&);
     int getNumofS();
     void setMaxS(int);
     void setNumofS(int);
