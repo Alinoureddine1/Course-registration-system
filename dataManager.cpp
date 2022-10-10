@@ -10,8 +10,17 @@ using namespace std;
 
 
 dataManager::dataManager() {
-	int positioncourse=0;
-	int positionstd=0;
+
+	 positioncourse = 0;
+	 positionstd = 0;
+	for (int i = 0; i < 100; i++) {
+		courseArray[i] = nullptr;
+	};
+
+	for (int i = 0; i < 2000; i++) {
+		studentArray[i] = nullptr;
+	};
+	
 }
 
 bool dataManager::insertCourseRegistration(CourseRegistration* that) {
@@ -23,7 +32,7 @@ bool dataManager::insertCourseRegistration(CourseRegistration* that) {
 		}
 	}
 	if (positioncourse < 100) {
-		cout << "CourseRegistration was added succesfully.\n" << endl;
+		cout << "CourseRegistration was added succesfully." << endl;
 		positioncourse++;
 		return true;
 	}
@@ -39,6 +48,7 @@ bool dataManager::insertStudent(Student* that) {
 	if (positionstd < 2000) {
 		studentArray[positionstd] = that;
 		positionstd++;
+		cout << "Student was added successfully.\n";
 		return true;
 	}
 	else {
@@ -49,17 +59,26 @@ bool dataManager::insertStudent(Student* that) {
 }
 
 bool dataManager::Delete(Student* that) {
-
+	bool res = false;
 	for (int i = 0; i < positionstd; i++) {
+
 		if (samestudent(studentArray[i], that)) {
-			delete studentArray[i];
+			
 			studentArray[i] = nullptr;
-			cout << "Student " << that->getid() << " Was Deleted Succesfully.\n";
-			return true;
+			res= true;
+		}
+		else { 
+			continue;
 		}
 	}
-	 cout << "Student " << that->getid() << " Was Not Found in our system.\n";
-	return false;
+	if (res) {
+		cout << "Student Was Deleted Succesfully.\n";
+		return res;
+	}
+	else {
+		cout << "Student Was Not Found in our system.\n";
+		return res;
+	}
 }
 
 bool dataManager::samestudent(Student* first , Student* second) {
@@ -94,6 +113,7 @@ bool dataManager::dropping_a_Course(Student* stud, Course& crs) {
 		for (int i = 0; i < positioncourse; i++) {
 			if (crs.samecourse(courseArray[i]->getcourse())) {
 				courseArray[i]->removestudent(stud);
+				cout << "Course was dropped successfully\n" << endl;
 				return true;
 			}
 		}
@@ -130,7 +150,7 @@ bool dataManager::studentinrecords(Student* that) {
 }
 
 void dataManager::print() {
-	cout << "The following are all the courses available this semester: " << endl;
+	cout << "The following are all the courses available this semester: \n" << endl;
 	for (int i = 0; i < positioncourse; i++) {
 		courseArray[i]->displaycourse();
 	}
@@ -144,7 +164,5 @@ dataManager::~dataManager() {
 		delete studentArray[i];
 	}
 
-	delete[] courseArray;
-	delete[] studentArray;
 	cout << "Object of type DataManager was deleted\n";
 }
