@@ -12,8 +12,8 @@ using namespace std;
 class dataManager {
 
 private:
-	CourseRegistration* courseArray[100]{nullptr};
-	Student* studentArray[2000]{ nullptr };
+	CourseRegistration* courseArray[100];
+	Student* studentArray[2000];
 	int positioncourse ;
 	int positionstd ;
 
