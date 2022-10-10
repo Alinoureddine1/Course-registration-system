@@ -20,11 +20,11 @@ Student::Student() {
 	}
 	 
 }
-Student::Student(std::string name, int id ,int counter, int credits,  Course* that[6]) {
+Student::Student(std::string name, int id, int credits,  Course* that[6]) {
 	
 	this->setname(name);
 	this->setid(id);
-	this->setcounter(counter);
+	this->setcounter(0);
 	this->setcredits(credits);
 
 	for (int i = 0; i < 6; i++) {                //copying the array
@@ -33,7 +33,20 @@ Student::Student(std::string name, int id ,int counter, int credits,  Course* th
 
 
 }
+Student::Student(std::string name, int id) {
 
+	this->setname(name);
+	this->setid(id);
+	this->numbcredits = 0;
+	this->setcounter(0);
+	
+
+	for (int i = 0; i < 6; i++) {                
+		this->courses[i] = nullptr;
+	}
+
+
+}
 void Student::setcounter(int count) {
 	this->counter = count;
 		
@@ -58,11 +71,11 @@ void Student::setcredits(int credits) {
 }
 bool Student::addcourse( Course& that) {
 
-	if (this->counter < 6) {
+	if (this->counter < 6 && this->numbcredits<15) {
 
 		for (int i = 0; i < counter; i++) {
 			if (this->courses[i]->overlap(that) ) {
-				std::cerr << "Error! This course overlaps with another course\n";
+				std::cerr << "Error! This course overlaps with another course\n" << endl;
 				return false;
 			}
 		}
@@ -73,7 +86,7 @@ bool Student::addcourse( Course& that) {
 
 	}
 	else {
-		std::cerr << "Error! You are not allowed to exceed 6 courses\n";
+		std::cerr << "Error! You are not allowed to exceed 6 courses or 15 credits\n";
 		return false;
 	}
 
@@ -82,7 +95,7 @@ bool Student::addcourse( Course& that) {
 bool Student::removecourse(Course& that) {
 	for (int i = 0; i < 6; i++) {
 		if (this->courses[i]->samecourse((that))) {
-			delete this->courses[i];
+			this->numbcredits -= that.getcedits();
 			this->courses[i] = nullptr;
 			return true;
 		
@@ -94,11 +107,12 @@ bool Student::removecourse(Course& that) {
 
 void Student::displaycourses() {
 	std::cout << "Student "<<this->getid()<<" is enrolled to the following courses:\n";
-	for (int i = 0; i < this->counter; i++) {
-		
-		this->courses[i]->printcourse();
+	for (int i = 0; i < 6; i++) {
+		if (courses[i] != nullptr) {
+			this->courses[i]->printcourse();
+		};
 	}
-	cout << "Total number of credits: " << this->getcredits() << endl;
+	cout << "Total number of credits: " << this->getcredits() << "\n" << endl;
 
 }
 int Student::getid() {
