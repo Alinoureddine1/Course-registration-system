@@ -7,18 +7,16 @@
 using namespace std;
 
 
-CourseRegistration::CourseRegistration()
-{
-   MaxNumberOfStudents = 0;
-   NumberOfCurrentStudents = 0;
-  
-    sptr= new Student*[MaxNumberOfStudents]{nullptr};
-}
+
 CourseRegistration::CourseRegistration(int maxS, int CurrentS)
 {
     MaxNumberOfStudents = maxS;
     NumberOfCurrentStudents = CurrentS;
-    sptr = new Student * [MaxNumberOfStudents] {nullptr};
+    sptr = new Student * [MaxNumberOfStudents];
+
+    for (int i = 0; i < MaxNumberOfStudents; i++) {
+        sptr[i] = nullptr;
+    }
     
     
 }
@@ -32,7 +30,7 @@ CourseRegistration::CourseRegistration(int maxS, int CurrentS)
 
 int CourseRegistration::getNumofS()
 {
-    return (this->NumberOfCurrentStudents +1);
+    return (this->NumberOfCurrentStudents );
 }
 void CourseRegistration::setMaxS(int max)
 {
@@ -53,6 +51,9 @@ void CourseRegistration::addStudent(Student * temp)
         cout << "Course is full\n" << endl;
     }
 }
+void CourseRegistration::setcourse(Course& crs) {
+    this->c1 = crs;
+}
 Course& CourseRegistration::getcourse() {
     return this->c1;
 }
@@ -69,7 +70,7 @@ bool CourseRegistration::lookforstudent(Student* temp)
 
 void CourseRegistration::displaycourse() {
     this->c1.printcourse();
-    cout << "Enrollments: " << this->getNumofS() << " Seats available: " << this->getMaxS() - this->getNumofS() << endl;
+    cout << "Enrollments: " << this->getNumofS() << "\t Seats available: " << this->getMaxS() - this->getNumofS() << "\n"<< endl;
 
 }
 
@@ -77,7 +78,6 @@ void CourseRegistration::removestudent(Student* temp) {
     for (int i = 0; i < NumberOfCurrentStudents; i++) {
 
         if (sptr[i]->samestudent(temp)) {
-            delete sptr[i];
             sptr[i] = nullptr;
             
         }
@@ -90,6 +90,6 @@ CourseRegistration::~CourseRegistration()
     for (int i = 0; i < MaxNumberOfStudents; i++) {
         delete sptr[i];
     };
-    delete[] sptr;
+    
     cout << "Object of time CourseRegistration was deleted.\n" << endl;
 }
